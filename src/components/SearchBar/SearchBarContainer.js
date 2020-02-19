@@ -2,7 +2,11 @@
 import React from "react";
 import "./SearchBar.css";
 
-const SearchBar = () => {
+const SearchBar = ({setSearchTerms, searchPost}) => {
+  const onEnterKeyDown = (e) => {
+    e.preventDefault()
+    e.key === 'Enter' && searchPost()
+  }
   return (
     <div className="search-bar-wrapper">
       <div className="image-wrapper">
@@ -12,6 +16,8 @@ const SearchBar = () => {
         <input
           type="text"
           placeholder="Search"
+          onChange={(e)=> setSearchTerms(e.target.value)}
+          onKeyDown={(e) => {e.key === 'Enter' && onEnterKeyDown(e)}}
         />
       </form>
       <div className="social-wrapper">
